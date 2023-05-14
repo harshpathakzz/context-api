@@ -1,19 +1,33 @@
 import "./App.css";
-
+import products from "./DB";
 import { useContext } from "react";
-import CounterContext from "./context/CounterContext";
-import Counter from "./components/Counter";
+import Card from "./components/Card";
+import Cart from "./components/Cart";
+
 function App() {
-  const countState = useContext(CounterContext);
-  console.log(countState);
+  const containerStyles = {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+  };
 
   return (
     <>
-      <h1>Count is {countState.count}</h1>
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
+      <h1>Shopping Cart</h1>
+      <div style={containerStyles}>
+        {products.map((product) => (
+          <Card
+            key={product.id}
+            name={product.name}
+            price={product.price}
+            id={product.id}
+          />
+        ))}
+      </div>
+      <Cart />
     </>
   );
 }
